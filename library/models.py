@@ -16,6 +16,9 @@ class Book(models.Model):
     inventory = models.PositiveIntegerField()
     daily_fee = models.DecimalField(decimal_places=2, max_digits=4)
 
+    def __str__(self):
+        return f"{self.title}-{self.author}"
+
 
 class Borrowing(models.Model):
     borrow_date = models.DateField(auto_now_add=True)
@@ -23,3 +26,8 @@ class Borrowing(models.Model):
     actual_return = models.DateField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user}-{self.borrow_date}"
+
+
